@@ -17,9 +17,11 @@ const addTask = async (req, res) => {
 };
 
 const listTasks = async (req, res) => {
+    console.log('fetching tasks')
     try {
-        const tasks = await Task.find();
+        const tasks = await Task.find().populate('miniTasks');
         res.status(200).json(tasks);
+        console.log('tasks fetched succesfully')
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

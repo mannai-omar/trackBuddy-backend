@@ -5,7 +5,7 @@ const User = require("../models/user.model");
 const checkTaskExistence = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const task = await Task.findById(id);
+        const task = await Task.findById(id).populate('miniTasks');
         if (!task) {
             return res.status(404).json({ message: 'Task not found' });
         }
